@@ -1,0 +1,43 @@
+
+services:
+  backend:
+    build: ./backend
+    container_name: insta-backend
+    ports:
+      - '5001:5000'
+    env_file:
+      - .env
+    depends_on:
+      - postgres
+    volumes:
+      - ./backend:/app
+    command: sh -c "npm install && npm run dev"
+
+  postgres:
+    image: postgres:14
+    container_name: insta-postgres
+    restart: always
+    environment:
+      POSTGRES_USER: $DB_USER
+      POSTGRES_PASSWORD: $DB_PASSWORD
+      POSTGRES_DB: $DB_NAME
+    ports:
+      - '5433:5432'
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: $PGADMIN_EMAIL
+      PGADMIN_DEFAULT_PASSWORD: $PGADMIN_PASSWORD
+    ports:
+      - '5050:80'
+    depends_on:
+      - postgres
+
+volumes:
+  pgdata:
