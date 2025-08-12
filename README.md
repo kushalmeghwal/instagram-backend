@@ -29,7 +29,7 @@ This project provides authentication, post management, story handling, and file 
 - **Backend Framework:** Node.js + Express.js (TypeScript)
 - **Database:** SQL (PostgreSQL/MySQL based on config)
 - **Authentication:** JSON Web Tokens (JWT)
-- **File Uploads:** Multer / Custom utility
+- **File Uploads:** Cloudinary
 - **Containerization:** Docker, Docker Compose
 
 ---
